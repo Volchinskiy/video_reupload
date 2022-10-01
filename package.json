@@ -1,0 +1,19 @@
+{
+  "name": "children-content-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "s": "tsc && node .\\build\\app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.2",
+    "google-auth-library": "^8.5.2",
+    "googleapis": "^108.0.0"
+  }
+}

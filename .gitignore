@@ -1,0 +1,18 @@
+# compiled code
+/build
+
+# dependences
+/node_modules
+
+# env
+.env
+
+# some crap
+client_secret.json
+quickstart.js
+yarn.lock
+youtube-nodejs-quickstart.json
+/access_tokens/*
+parser-v2/ffmpeg.exe
+parser-v2/ffprobe.exe
+parser-v2/yt-dlp.exe
