@@ -7,12 +7,17 @@
 # env
 .env
 
-# some crap
+# downloaded videos
+videos/*
+
+# It needs to be named
 client_secret.json
 quickstart.js
 yarn.lock
 youtube-nodejs-quickstart.json
 /access_tokens/*
-parser-v2/ffmpeg.exe
-parser-v2/ffprobe.exe
-parser-v2/yt-dlp.exe
+parser_v2/ffmpeg.exe
+parser_v2/ffprobe.exe
+parser_v2/yt-dlp.exe
+/channels
+/photo_shop
