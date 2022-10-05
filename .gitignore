@@ -16,8 +16,7 @@ quickstart.js
 yarn.lock
 youtube-nodejs-quickstart.json
 /access_tokens/*
-parser_v2/ffmpeg.exe
-parser_v2/ffprobe.exe
-parser_v2/yt-dlp.exe
+/utilities
 /channels
 /photo_shop
+/r_videos
