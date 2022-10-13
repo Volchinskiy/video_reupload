@@ -1,28 +1,37 @@
-const readline = require("readline");
+const readline = require('readline');
 
-const { log, err } = require("./functions/styledLogs");
-const { last } = require("./functions/last");
-const { executeYt_dlp } = require("./functions/executeYt_dlp");
-
+const {
+  spawnYt_dlp,  log,
+  last,         error,
+  success,      info,
+} = require('./functions');
+const { sadFace } = require('./emoji');
+const { dataBase } = require('./db');
 class YouTubeLoader {
-  constructor() { this.askUrl(); };
+  constructor() { this.askUrl(); }; 
   
   terminal = readline.createInterface({ input: process.stdin, output: process.stdout });
-  vFormatId: null | number = null;
-  aFormatId: null | number = null;
+  vFormatId:  null | number = null;
+  aFormatId:  null | number = null;
   allFormats: null | string = null;
-  videoUrl: null | string = null;
+  videoUrl:   null | string = null;
 
   public askUrl() {
-    this.terminal.question("Url: ", async (url: string) => {
-      log("\nSTART IDENTIFYING SUITABLE FORMATS");
+    this.terminal.question('\nPLEASE, ENTER VIDEO URL: ', async (url: string) => {
+      const isDownloaded = await dataBase.check(url);
+      if(isDownloaded) {
+        error(`\n SORRY, THIS VIDEO HAS BEEN DOWNLOADED ${sadFace}`);
+        this.askUrl();
+        return;
+      } 
       this.videoUrl = url;
+      info('\nSTARTED DEFINING THE BEST VIDEO AND AUDIO FORMATS.');
       await this.defFormats();
       this.defVFormat();
       this.defAFormat();
       if (!this.vFormatId || !this.aFormatId) {
-        if (!this.vFormatId) err("\n COULDN'T DEFINE VIDEO FORMAT \u2639  \n");
-        if (!this.aFormatId) err("\n COULDN'T DEFINE AUDIO FORMAT \u2639  \n");
+        if (!this.vFormatId) error(`\n SORRY, VIDEO FORMAT COULDN\'T BE DEFINED. ${sadFace}\n`); // here call method whatDidntDef
+        if (!this.aFormatId) error(`\n SORRY, AUDIO FORMAT COULDN\'T BE DEFINED. ${sadFace}\n`);
         log(this.allFormats);
         this.askFormats();
         return;
@@ -31,38 +40,31 @@ class YouTubeLoader {
       this.askUrl();
     });
   }
-
   private async defFormats(): Promise<void> {
-    const allFormats = await executeYt_dlp(["-F", this.videoUrl]);
+    const allFormats = await spawnYt_dlp(['-F', this.videoUrl], false);
     this.allFormats = allFormats;
   }
   private defVFormat() {
-    const formatsArr = this.allFormats!.split("\n");
-    const mp4Arr = formatsArr.filter(
-      (str: string) =>
-        str.includes("mp4") &&
-        (str.includes("avc1.640028") || str.includes("avc1.64002a"))
-    );
+    const formatsArr = this.allFormats!.split('\n');
+    const mp4Arr = formatsArr.filter((str: string) => str.includes('mp4') && (str.includes('avc1.640028') || str.includes('avc1.64002a') || str.includes('avc1.4d401e')));
     const lastFormat = last(mp4Arr);
     const foramtId = parseInt(lastFormat);
     if (foramtId) this.vFormatId = foramtId;
   }
   private defAFormat() {
-    const formatsArr = this.allFormats!.split("\n");
-    const m4aArr = formatsArr.filter(
-      (str: string) => str.includes("m4a") && str.includes("medium")
-    );
+    const formatsArr = this.allFormats!.split('\n');
+    const m4aArr = formatsArr.filter((str: string) => str.includes('m4a') && str.includes('medium'));
     const lastFormat = last(m4aArr);
     const foramtId = parseInt(lastFormat);
     if (foramtId) this.aFormatId = foramtId;
   }
   private async askFormats(): Promise<void> {
     this.terminal.question(
-      "Enter the needed formats.\nExample: 137+140\n: ",
+      'PLEASE, ENTER THE NEDDED FORMATS.\nEXAMPLE: 137+140\n: ',
       async (formats: string) => {
-        const [vId, aId]: string[] = formats.split("+");
+        const [vId, aId]: string[] = formats.split('+');
         if (!vId || !aId) {
-          err("\n BAD INPUT \n");
+          error('\n INVALID INPUT, PLEASE TRY AGAIN. \n');
           this.askFormats();
           return;
         }
@@ -74,22 +76,23 @@ class YouTubeLoader {
     );
   }
   private async download(): Promise<void> {
-    log("\nSTARTED UPLOADING\n");
-    await executeYt_dlp([
-      "-f",
+    info('\nSTARTED VIDEO DOWNLOADING.\n');
+    await spawnYt_dlp([
+      '-f',
       `${this.vFormatId}+${this.aFormatId}`,
       this.videoUrl,
-      "-P",
-      "./videos"
-      ,]).then((r: string) => log(r));
-    log("FINISHED UPLOADING VIDEO", "\n");
+      '-P',
+      './videos'
+      ], true);
+    await dataBase.insert(this.videoUrl);
+    success('\nFINISHED VIDEO DOWNLOADING.');
     this.resetState();
   }
   private resetState () {
-    this.vFormatId = null;
-    this.aFormatId = null;
+    this.vFormatId  = null;
+    this.aFormatId  = null;
     this.allFormats = null;
-    this.videoUrl = null;
+    this.videoUrl   = null;
   }
 }
 

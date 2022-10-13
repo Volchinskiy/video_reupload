@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "s": "tsc && node .\\build\\app.js"
+    "start": "tsc && node .\\build\\app.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "dotenv": "^16.0.2"
+    "dotenv": "^16.0.2",
+    "mysql2": "^2.3.3"
   }
 }
