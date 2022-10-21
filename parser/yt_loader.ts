@@ -44,14 +44,14 @@ class YouTubeLoader {
     const allFormats = await spawnYt_dlp(['-F', this.videoUrl], false);
     this.allFormats = allFormats;
   }
-  private defVFormat() {
+  private defVFormat() { // maybe use new Function
     const formatsArr = this.allFormats!.split('\n');
     const mp4Arr = formatsArr.filter((str: string) => str.includes('mp4') && (str.includes('avc1.640028') || str.includes('avc1.64002a') || str.includes('avc1.4d401e')));
     const lastFormat = last(mp4Arr);
     const foramtId = parseInt(lastFormat);
     if (foramtId) this.vFormatId = foramtId;
   }
-  private defAFormat() {
+  private defAFormat() { // maybe use new Function
     const formatsArr = this.allFormats!.split('\n');
     const m4aArr = formatsArr.filter((str: string) => str.includes('m4a') && str.includes('medium'));
     const lastFormat = last(m4aArr);
@@ -82,7 +82,7 @@ class YouTubeLoader {
       `${this.vFormatId}+${this.aFormatId}`,
       this.videoUrl,
       '-P',
-      './videos'
+      './d_videos'
       ], true);
     await dataBase.insert(this.videoUrl);
     success('\nFINISHED VIDEO DOWNLOADING.');
@@ -96,5 +96,5 @@ class YouTubeLoader {
   }
 }
 
-const youTubeLoader = new YouTubeLoader(); 
+const youTubeLoader = new YouTubeLoader();
 export { youTubeLoader };

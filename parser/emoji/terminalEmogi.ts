@@ -1,3 +1,1 @@
-const sadFace = '|\u2639 |';
-
-export { sadFace };
+export const sadFace = '|\u2639 |';

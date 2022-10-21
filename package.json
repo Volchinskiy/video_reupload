@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node .\\build\\app.js"
+    "download": "tsc && node .\\build\\yt_loader.js",
+    "preview": "tsc && node .\\build\\preview.js"
   },
   "keywords": [],
   "author": "",
