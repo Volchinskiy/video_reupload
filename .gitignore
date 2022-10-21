@@ -10,6 +10,10 @@
 # downloaded videos
 videos/*
 
+# img
+img_to_remove_gs/
+img_without_gs/
+
 # It needs to be named
 client_secret.json
 quickstart.js

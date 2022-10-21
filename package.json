@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "download": "tsc && node .\\build\\yt_loader.js",
-    "preview": "tsc && node .\\build\\preview.js"
+    "removegs": "tsc && node .\\build\\remove_gs.js"
   },
   "keywords": [],
   "author": "",
