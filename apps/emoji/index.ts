@@ -1,1 +1,0 @@
-export { sadFace } from './terminalEmogi';
