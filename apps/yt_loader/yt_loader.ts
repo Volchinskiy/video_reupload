@@ -8,8 +8,8 @@ const {
 const { sadFace } = require('./emoji');
 const { dataBase } = require('./db');
 class YouTubeLoader {
-  constructor() { this.askUrl(); }; 
-  
+  constructor() { this.askUrl(); };
+
   terminal = readline.createInterface({ input: process.stdin, output: process.stdout });
   vFormatId:  null | number = null;
   aFormatId:  null | number = null;
@@ -23,7 +23,7 @@ class YouTubeLoader {
         error(`\n SORRY, THIS VIDEO HAS BEEN DOWNLOADED ${sadFace}`);
         this.askUrl();
         return;
-      } 
+      }
       this.videoUrl = url;
       info('\nSTARTED DEFINING THE BEST VIDEO AND AUDIO FORMATS.');
       await this.defFormats();

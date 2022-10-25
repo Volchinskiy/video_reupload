@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "download": "tsc && node .\\build\\yt_loader.js",
+    "download": "tsc && node .\\build\\",
     "removegs": "tsc && node .\\build\\remove_gs\\remove_gs_node_wrapper.js"
   },
   "keywords": [],

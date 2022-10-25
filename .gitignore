@@ -3,25 +3,19 @@
 
 # dependences
 /node_modules
+/apps/yt_loader/utilities
 
 # env
 .env
-
-# downloaded videos
-videos/*
 
 # img
 img_to_remove_gs/
 img_without_gs/
 
-# It needs to be named
-client_secret.json
-quickstart.js
+# videos
+/apps/yt_loader/r_videos
+/apps/yt_loader/d_videos
+
+# other
 yarn.lock
-youtube-nodejs-quickstart.json
-/access_tokens/*
-/utilities
 /channels
-/photo_shop
-/r_videos
-/d_videos
