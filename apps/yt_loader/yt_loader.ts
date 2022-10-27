@@ -1,12 +1,14 @@
 const readline = require('readline');
+require("dotenv").config();
 
 const {
   spawnYt_dlp,  log,
   last,         error,
   success,      info,
-} = require('./functions');
-const { sadFace } = require('./emoji');
-const { dataBase } = require('./db');
+} = require('./../helpers/functions');
+const { sadFace } = require('./../helpers/emoji');
+const { dataBase } = require('./../db');
+
 class YouTubeLoader {
   constructor() { this.askUrl(); };
 
@@ -38,6 +40,7 @@ class YouTubeLoader {
       }
       await this.download();
       this.askUrl();
+      return;
     });
   }
   private async defFormats(): Promise<void> {
@@ -77,12 +80,13 @@ class YouTubeLoader {
   }
   private async download(): Promise<void> {
     info('\nSTARTED VIDEO DOWNLOADING.\n');
+    const path = process.env.D_VIDEOS;
     await spawnYt_dlp([
       '-f',
       `${this.vFormatId}+${this.aFormatId}`,
       this.videoUrl,
       '-P',
-      './d_videos'
+      path
       ], true);
     await dataBase.insert(this.videoUrl);
     success('\nFINISHED VIDEO DOWNLOADING.');

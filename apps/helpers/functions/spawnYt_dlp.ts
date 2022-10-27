@@ -1,11 +1,12 @@
-const { log } = require('./styledLogs');
 const { spawn } = require('child_process');
+const { log } = require('./styledLogs');
+require("dotenv").config();
 
 export const spawnYt_dlp = (commands: string[], isShowLogs: boolean): Promise<any> => {
   return new Promise((resolve) => {
     let buffer: string = '';
-    const filePath = './utilities/yt-dlp.exe';
-    const processYT = spawn(filePath, commands);
+    const path = process.env.YT_DLP;
+    const processYT = spawn(path, commands);
     processYT.stdout.on("data", (data: Buffer) => {
       const readableData = data.toString();
       if (isShowLogs) log(readableData.replace("\n", ""));
