@@ -3,19 +3,22 @@ const { sadFace, happyFace } = require("./../helpers/emoji");
 const { spawn } = require("child_process");
 const fs = require('fs/promises');
 
-const showData = (data: Buffer, type: string) => {
+const showData = (type: string) => (data: Buffer) => {
   const readableData = data.toString()
   if(type === "error") { error(readableData); return; };
   log(readableData);
 }
+const showError = showData("error");
+const showLog = showData("log")
+
 
 const removeGS = (imgName: string, postfix?: string): Promise<number> => {
   return new Promise((resolve, reject) => {
     const path = process.env.GS_PY_REMOVER;
     const argv = postfix ? [path, imgName, postfix] : [path, imgName];
     const processPy = spawn("python", argv);
-    processPy.stdout.on("data", (d: Buffer) => showData(d, "log"));
-    processPy.stderr.on("data", (d: Buffer) => showData(d, "error"));
+    processPy.stdout.on("data", showLog);
+    processPy.stderr.on("data", showError);
     processPy.on("close", (code: number) => { if(code) reject(code); resolve(code); });
   });
 }
