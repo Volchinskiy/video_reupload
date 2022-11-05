@@ -80,7 +80,7 @@ class YouTubeLoader {
   }
   private async download(): Promise<void> {
     info('\nSTARTED VIDEO DOWNLOADING.\n');
-    const path = process.env.D_VIDEOS;
+    const path = process.env.D_VIDEOS_PATH;
     await spawnYt_dlp([
       '-f',
       `${this.vFormatId}+${this.aFormatId}`,

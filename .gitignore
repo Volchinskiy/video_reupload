@@ -11,6 +11,9 @@
 # img
 img_to_remove_gs/
 img_without_gs/
+apps/preview/helpers/bimba_faces
+apps/preview/helpers/blanks
+apps/preview/helpers/number_chars
 
 # videos
 /apps/yt_loader/r_videos
@@ -19,3 +22,4 @@ img_without_gs/
 # other
 yarn.lock
 /channels
+apps/preview/helpers/ps
