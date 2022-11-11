@@ -6,3 +6,5 @@ export const todayDate = (): string => {
   const year = today.getFullYear();
   return `${day}_${month}_${year}`;
 };
+
+export const todayMilliseconds = (): string => `${Date.now()}`

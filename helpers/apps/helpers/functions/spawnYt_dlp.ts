@@ -1,7 +1,8 @@
 const { spawn } = require('child_process');
 const { log } = require('./styledLogs');
 require("dotenv").config();
-
+// maybe show errors, how you do it in remove_gs_node_wrapper.ts
+// maybe up spawn because you use spawn py and spawn yt_dlp
 export const spawnYt_dlp = (commands: string[], isShowLogs: boolean): Promise<any> => {
   return new Promise((resolve) => {
     let buffer: string = '';

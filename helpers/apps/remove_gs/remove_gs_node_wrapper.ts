@@ -3,7 +3,7 @@
   const { sadFace, happyFace } = require("./../helpers/emoji");
   const { spawn } = require("child_process");
   const fs = require('fs/promises');
-
+  // maybe make it ad class
   const showData = (type: string) => (data: Buffer) => {
     const readableData = data.toString()
     if(type === "error") { error(readableData); return; };
@@ -11,7 +11,6 @@
   }
   const showError = showData("error");
   const showLog = showData("log")
-
 
   const removeGS = (imgName: string, postfix?: string): Promise<number> => {
     return new Promise((resolve, reject) => {
