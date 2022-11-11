@@ -3,23 +3,20 @@
 
 # dependences
 /node_modules
-/apps/yt_loader/utilities
+helpers/apps/helpers/utilities
 
 # env
 .env
 
-# img
-img_to_remove_gs/
-img_without_gs/
-apps/preview/helpers/bimba_faces
-apps/preview/helpers/blanks
-apps/preview/helpers/number_chars
-
-# videos
-/apps/yt_loader/r_videos
-/apps/yt_loader/d_videos
-
 # other
 yarn.lock
-/channels
-apps/preview/helpers/ps
+
+# it doesn't relate to code
+resources/
+helpers/tik_tok
+product/
+helpers/apps/preview/helpers/ps
+helpers/apps/preview/output
+helpers/apps/preview/resources
+helpers/apps/remove_gs/input
+helpers/apps/remove_gs/output

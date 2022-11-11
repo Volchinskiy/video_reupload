@@ -12,14 +12,15 @@ const { dataBase } = require('./../db');
 class YouTubeLoader {
   constructor() { this.askUrl(); };
 
-  terminal = readline.createInterface({ input: process.stdin, output: process.stdout });
+  OUTPUT_PATH: string = './apps/yt_loader/output';
+  TERMINAL = readline.createInterface({ input: process.stdin, output: process.stdout });
   vFormatId:  null | number = null;
   aFormatId:  null | number = null;
   allFormats: null | string = null;
   videoUrl:   null | string = null;
 
   public askUrl() {
-    this.terminal.question('\nPLEASE, ENTER VIDEO URL: ', async (url: string) => {
+    this.TERMINAL.question('\nPLEASE, ENTER VIDEO URL: ', async (url: string) => {
       const isDownloaded = await dataBase.check(url);
       if(isDownloaded) {
         error(`\n SORRY, THIS VIDEO HAS BEEN DOWNLOADED ${sadFace}`);
@@ -62,7 +63,7 @@ class YouTubeLoader {
     if (foramtId) this.aFormatId = foramtId;
   }
   private async askFormats(): Promise<void> {
-    this.terminal.question(
+    this.TERMINAL.question(
       'PLEASE, ENTER THE NEDDED FORMATS.\nEXAMPLE: 137+140\n: ',
       async (formats: string) => {
         const [vId, aId]: string[] = formats.split('+');
@@ -80,13 +81,12 @@ class YouTubeLoader {
   }
   private async download(): Promise<void> {
     info('\nSTARTED VIDEO DOWNLOADING.\n');
-    const path = process.env.D_VIDEOS_PATH;
     await spawnYt_dlp([
       '-f',
       `${this.vFormatId}+${this.aFormatId}`,
       this.videoUrl,
       '-P',
-      path
+      this.OUTPUT_PATH
       ], true);
     await dataBase.insert(this.videoUrl);
     success('\nFINISHED VIDEO DOWNLOADING.');
