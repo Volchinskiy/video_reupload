@@ -6,15 +6,16 @@ const { info } = require('./helpers/functions');
 class DataBase {
   constructor() { info('\n CONNECTED TO DATABASE. '); }
 
-  dataBaseUrl = process.env.PLANETSCALE_DATABASE_URL;
   userName = process.env.USERNAME;
-  connection = mysql.createConnection(this.dataBaseUrl).promise();
+
+  DATA_BASE_URL = process.env.PLANETSCALE_DATABASE_URL;
+  CONNECTION = mysql.createConnection(this.DATA_BASE_URL).promise();
 
   public async insert(url: string): Promise<void> {
-    await this.connection.query(`INSERT INTO downloaded_videos (url, user) VALUES ('${url}', '${this.userName}');`);
+    await this.CONNECTION.query(`INSERT INTO downloaded_videos (url, user) VALUES ('${url}', '${this.userName}');`);
   }
   public async check(url: string): Promise<boolean> {
-    const data = await this.connection.query(`SELECT * FROM downloaded_videos WHERE url = '${url}'`);
+    const data = await this.CONNECTION.query(`SELECT * FROM downloaded_videos WHERE url = '${url}'`);
     return Boolean(data[0].length);
   }
 }
