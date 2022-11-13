@@ -9,3 +9,5 @@ export { warn              } from "./styledLogs";
 export { error             } from "./styledLogs";
 export { success           } from "./styledLogs";
 export { spawnYt_dlp       } from "./spawnYt_dlp";
+export { spawnProcess      } from "./spawnYt_dlp";
+export { spawnPy           } from "./spawnYt_dlp";

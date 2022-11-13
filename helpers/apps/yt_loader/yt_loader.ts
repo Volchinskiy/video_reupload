@@ -42,12 +42,11 @@
           return;}
         await this.download();
         this.askUrl();
-        return;
-      });}
+        return;});}
     private async knowAllFormats(): Promise<void> {
-      const allFormats = await spawnYt_dlp(['-F', this.videoUrl], false);
+      const allFormats = await spawnYt_dlp(['-F', this.videoUrl]);
       this.allFormats = allFormats;}
-    private defFormat(format: string) {
+    private defFormat (format: string) {
       const allFormatsArr = this.allFormats!.split('\n');
       const isVideo = format === "video";
       const func = isVideo ? this.V_FILTER_FUNC : this.A_FILTER_FUNC;
@@ -55,9 +54,8 @@
       const lastFormat = last(neededFormats);
       const formatId = parseInt(lastFormat);
       if (formatId) {
-        if(isVideo) this.vFormatId = formatId;
-        else this.aFormatId = formatId;}
-      }
+        if (isVideo) this.vFormatId = formatId;
+        else this.aFormatId = formatId;}}
     private async askFormats(): Promise<void> {
       this.TERMINAL.question(
         'PLEASE, ENTER THE NEEDED FORMATS.\nEXAMPLE: 137+140\n: ',
@@ -70,9 +68,7 @@
           this.vFormatId = +vId;
           this.aFormatId = +aId;
           await this.download();
-          this.askUrl();
-        }
-      );}
+          this.askUrl();});}
     private async download(): Promise<void> {
       info('\nSTARTED VIDEO DOWNLOADING.\n');
       await spawnYt_dlp([

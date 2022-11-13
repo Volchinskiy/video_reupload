@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
 from PIL import Image
 import sys
 import os
+
+load_dotenv()
 
 def execute():
   argv = sys.argv
