@@ -3,9 +3,9 @@
   require("dotenv").config();
 
   const {
-    spawnYt_dlp,  log,
-    last,         error,
-    success,      info,
+    last,        log,
+    success,     info,
+    spawnYt_dlp, error,
   } = require('./../helpers/functions');
   const { sadFace } = require('./../helpers/emoji');
   const { dataBase } = require('./../db');
