@@ -1,22 +1,23 @@
 {
-  "name": "children-content-parser",
+  "name": "video_reupload",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "download": "tsc && node .\\build\\yt_loader\\yt_loader.js",
     "removegs": "tsc && node .\\build\\remove_gs\\remove_gs_node_wrapper.js",
-    "preview": "tsc && node .\\build\\preview\\preview.js"
+    "preview": "tsc && node .\\build\\preview\\preview.js",
+    "test": "python helpers\\apps\\tt_loader\\tt_loader.py"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.7.23",
+    "prettier": "2.8.0",
     "typescript": "^4.8.4"
   },
   "dependencies": {
-    "axios": "^0.27.2",
     "dotenv": "^16.0.2",
     "jimp": "^0.16.2",
     "mysql2": "^2.3.3"

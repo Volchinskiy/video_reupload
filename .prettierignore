@@ -1,17 +1,8 @@
-# compiled code
 /build
-
-# dependences
 /node_modules
 helpers/apps/helpers/utilities
-
-# env
 .env
-
-# other
 yarn.lock
-
-# it doesn't relate to code
 resources/
 helpers/tik_tok
 product/

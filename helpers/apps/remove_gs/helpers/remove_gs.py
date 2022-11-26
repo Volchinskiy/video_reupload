@@ -1,12 +1,11 @@
 from dotenv import load_dotenv
 from PIL import Image
-import sys
+from sys import argv
 import os
 
 load_dotenv()
 
 def execute():
-  argv = sys.argv
   img_name = argv[1]
   input_path = os.getenv('GS_INPUT_PATH')
 

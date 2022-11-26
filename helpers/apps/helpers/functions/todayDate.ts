@@ -7,4 +7,4 @@ export const todayDate = (): string => {
   return `${day}_${month}_${year}`;
 };
 
-export const todayMilliseconds = (): string => `${Date.now()}`
+export const todayMilliseconds = (): string => `${Date.now()}`;
