@@ -7,8 +7,7 @@
     "download": "tsc && node .\\build\\yt_loader\\yt_loader.js",
     "removegs": "tsc && node .\\build\\remove_gs\\remove_gs_node_wrapper.js",
     "preview": "tsc && node .\\build\\preview\\preview.js",
-    "format": "tsc && node .\\build\\info_formatter\\info_formatter.js",
-    "test": "python helpers\\apps\\tt_loader\\tt_loader.py"
+    "format": "tsc && node .\\build\\info_formatter\\info_formatter.js"
   },
   "keywords": [],
   "author": "",
